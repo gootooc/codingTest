@@ -1,0 +1,9 @@
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\bin\Debug\netcoreapp1.1\01_SelectionSort.deps.json
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\bin\Debug\netcoreapp1.1\01_SelectionSort.runtimeconfig.json
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\bin\Debug\netcoreapp1.1\01_SelectionSort.runtimeconfig.dev.json
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\bin\Debug\netcoreapp1.1\01_SelectionSort.dll
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\bin\Debug\netcoreapp1.1\01_SelectionSort.pdb
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\obj\Debug\netcoreapp1.1\01_SelectionSort.csproj.CoreCompileInputs.cache
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\obj\Debug\netcoreapp1.1\01_SelectionSort.AssemblyInfo.cs
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\obj\Debug\netcoreapp1.1\01_SelectionSort.dll
+E:\Document\_Coding\Net\Algorithm\01_SelectionSort\obj\Debug\netcoreapp1.1\01_SelectionSort.pdb
