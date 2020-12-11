@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+
+<html lang="ko">
+  
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebMarket GoGoX 전송 테스트</title>
+    <style type="text/css">
+        .none { display:none; }
+        /* List Section */
+        .listU { position: relative; border: 1px solid #ddd; font-size: 12px; line-height: normal; *zoom: 1; background: #fff; }
+        .listU a { text-decoration: none; color: #666; }
+        .listU a:hover, .listU a:active, .listU a:focus { text-decoration: underline; }
+        .listU em { font-style: normal; }
+        .listU h2 { font-size: 12px; margin: 0; padding: 10px 0 8px 13px; color: #333; border: 1px solid #fff; background: #f7f7f7; }
+        .listU h2 em { color: #cf3292; }
+        .listU ul { margin: 0; padding: 10px 12px 0 12px; list-style: none; border-top: 1px solid #ddd; }
+        .listU li { position: relative; margin: 0 0 10px 0; }
+        .listU li:after { content: ""; display: block; clear: both; }
+        .listU li .i { float: left; margin: 0 4px 0 0; }
+        .listU li a { float: left; }
+        .listU li .time { float: right; clear: right; color: #a8a8a8; font: 11px Tahoma; white-space: nowrap; }
+        .listU .more { position: absolute; top: 10px; right: 12px; font: 11px Dotum, 돋움; text-decoration: none !important; }
+        .listU .more span { font-weight: bold; color: #d76ea9; font-size: 16px; vertical-align: middle; margin: 0 2px 0 0; }
+
+        /* Button */
+        .btn { position: relative; display: inline-block; margin: 2px; vertical-align: top; }
+        .btn * { display: inline-block; padding: 0 8px; font-size: 12px; height: 24px; line-height: 22px; margin: 0; font-weight: bold !important; color: #fff; text-decoration: none !important; border: 1px solid; cursor: pointer; overflow: visible; border-radius: 3px; box-shadow: inset 0 0 1px #fff; -moz-box-shadow: inset 0 0 1px #fff; -webkit-box-shadow: inset 0 0 1px #fff; background-color: #666; text-shadow: 0 -1px 0 #333; zoom: 1; }
+        .btn a,
+        .btn button[type=button] { border-color: #ccc; color: #333 !important; background: #eee -webkit-gradient(linear,0% 0%,0% 100%,from(#fff),to(#ddd)); background: #eee -moz-linear-gradient(top,#fff,#ddd); background-color: #eee; text-shadow: 1px 1px 0 #fff; filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#ffffff, endColorStr=#dddddd); }
+        .btn input, .btn button[type=submit] { border-color: #666; background: #333 -webkit-gradient(linear,0% 0%,0% 100%,from(#777),to(#777),color-stop(0.5,#333),color-stop(0.5,#000)); background: #333 -moz-linear-gradient(top,#777,#000); background-color: #333; color: #ffc; filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#777777, endColorStr=#333333); }
+        .btn a { height: 22px; }
+        .btn.medium * { padding: 0 12px; font-size: 16px; height: 30px; line-height: 28px; }
+        .btn.medium a { height: 28px; }
+        .btn.large * { padding: 0 18px; font-size: 22px; height: 36px; line-height: 34px; }
+        .btn.large a { height: 34px; }
+    </style>
+</head>
+<body>
+    <form id="frmGoGoXTDD" name="frmGoGoXTDD" method="post" action="" >
+        <input type="hidden" id="type" name="type" value="" />
+    </form>
+    <div class="listU">
+        <h2><em>WebMarket GoGoX</em> 전송 테스트</h2>
+        <ul>
+            <li>
+                <span class="i">&rsaquo;</span> 테스트 OrderNo : <br /><input type="text" id="testONO" name="testONO" value="001-A459181577" />
+                <%--<%= OrdersInfo.cInfo.OrderNo %>, <%= OrdersInfo.cInfo.OID %>, <%= OrdersInfo.cInfo.DeliveryNo %>--%>
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 테스트 ItemId : <br /><input type="text" id="testItemId" name="testItemId" value="248659109" />
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 테스트 ProxyCode : <br /><input type="text" id="testProxyCode" name="testProxyCode" value="90" />
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 테스트 DeliveryMethod : <br /><input type="text" id="testDeliveryMethod" name="testDeliveryMethod" value="36" />
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 배송상황 &nbsp
+                <button id="btnStatusAjax" type="button" class="codeToggle" data-type="1">전송</button> https://business-staging.gogovan.co.kr/api/order/status
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 배송접수 &nbsp
+                <button id="btnOrderDeliveryAjax" type="button" class="codeToggle" data-type="2">전송</button> https://business-staging.gogovan.co.kr/api/order/submit
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 운임조회 &nbsp
+                <button id="btnDeliveryPay" type="button" class="codeToggle" data-type="3">전송</button> https://business-staging.gogovan.co.kr/api/order/price
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 접수취소 &nbsp
+                <button id="btnDeliveryCancelAjax" type="button" class="codeToggle" data-type="4">전송</button> https://business-staging.gogovan.co.kr/api/order/cancel
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> WebHook 
+                 <button id="btnGoodsStatus" type="button" class="codeToggle" data-type="5">전송</button>
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 주문과정(화물) 
+                <button type="button" class="codeToggle freightBtn" data-isbn="248659109" data-dm="90">전송(오토바이)</button>
+                <button type="button" class="codeToggle freightBtn" data-isbn="251777197" data-dm="88">전송(1톤)</button>
+                <button type="button" class="codeToggle freightBtn" data-isbn="251781514" data-dm="87">전송(라보)</button>
+                <button type="button" class="codeToggle freightBtn" data-isbn="251782054" data-dm="86">전송(밴)</button>
+                <button type="button" class="codeToggle freightBtn" data-isbn="251782060" data-dm="85">전송(다마스)</button>
+
+            </li>
+            <li>
+                <span class="i">&rsaquo;</span> 주문과(택배) 
+                 <button id="btnOrders2" type="button" class="codeToggle" data-type="5">전송</button>
+            </li>
+
+            
+        </ul>
+    </div>
+    <div id="list" class="listU">
+        <h2><em>결과(JSON)</em></h2>
+        <ul>
+            <li> 
+                <asp:Literal ID="ltrResult" runat="server" Text="대기중"></asp:Literal>
+            </li>
+        </ul>
+        
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
+        var itemId = $('#testItemId').val(); //248659109;
+        var deliveryMethod = $('#testDeliveryMethod').val();// 31;
+        var proxyCode = $('#testProxyCode').val(); // 85;
+        var ono = $('#testONO').val();
+
+        $(document).ready(function () {
+            $('#btnTracking, #btnDeliveryCancel, #btnGoodsStatus,#btnOrderDelivery').on('click', function () {
+                var f = $("#frmGoGoXTDD");
+                console.log($(this).data("type"));
+                f.find("#type").val($(this).data("type"));
+                f.submit();
+            });
+
+            // 배송상황
+            $('#btnStatusAjax').on('click', function () {
+                if (ono == "") {
+                    alert('주문번호를 입력해주세요.');
+                    return false;
+                }
+
+                $.ajax({
+                    type: "Get",
+                    url: "/webService/gogox/api.aspx",
+                    data: { methodType: "status", ono: ono },
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    //dataType: "json",
+                    timeout: 30000,
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    }
+                });
+            });
+
+
+            // 배송취소
+            $('#btnDeliveryCancelAjax').on('click', function () {
+                if (ono == "") {
+                    alert('주문번호를 입력해주세요.');
+                    return false;
+                }
+
+                $.ajax({
+                    type: "Get",
+                    url: "/webService/gogox/api.aspx",
+                    data: { methodType: "cancel", ono: ono },
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    //dataType: "json",
+                    timeout: 30000,
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    }
+                });
+            });
+
+            // 배송접수
+            $('#btnOrderDeliveryAjax').on('click', function () {
+                if (ono == "") {
+                    alert('주문번호를 입력해주세요.');
+                    return false;
+                }
+
+                $.ajax({
+                    type: "Get",
+                    url: "/webService/gogox/api.aspx",
+                    data: { methodType: "submit", ono: ono },
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    //dataType: "json",
+                    timeout: 30000,
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    }
+                });
+            });
+
+            // 운임조회
+            $('#btnDeliveryPay').on('click', function () {
+                $.ajax({
+                    type: "Get",
+                    //url: "/webService/gogox/ExpectDeliveryPayAjax.aspx",
+                    //data: { method: "P", itemId: itemId, deliveryMethod : deliveryMethod, proxyCode : proxyCode },
+                    url: "/webService/gogox/api.aspx",
+                    data: { methodType: "price", ono: ono },
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    dataType: "json",
+                    timeout: 3000,
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    }
+                });
+            });
+
+
+            let freightBtns = document.querySelectorAll('.freightBtn');
+            console.log(freightBtns);
+            [].forEach.call(freightBtns, function (freightBtn) {
+                let isbn = freightBtn.dataset.isbn;
+                let deliveryMethod = freightBtn.dataset.dm;
+                freightBtn.addEventListener("click", () => location.href=`/order/worder_chk_order_real.aspx?CartType=6&ISBN=${isbn}&DeliveryMethod=${deliveryMethod}`
+            , false);
+        
+        });
+        
+            $('#btnOrders').on('click', function () {
+                location.href = "/order/worder_chk_order_real.aspx?CartType=6&ISBN=J682832000&DeliveryMethod=31";
+            });
+
+            $('#btnOrders2').on('click', function () {
+                location.href = "/order/worder_chk_order_real.aspx?CartType=6&ISBN=J682832000&DeliveryMethod=1";
+            });
+
+        });
+
+        const freightSubmit = (isbn, deliveryMethod) => {
+            console.log(`/order/worder_chk_order_real.aspx?CartType=6&ISBN=${isbn}&DeliveryMethod=${deliveryMethod}`);
+        }
+        
+        
+        
+        
+        
+        /*
+        let abc = ['#btnTracking', '#btnOrderDelivery', '#btnDeliveryPay', '#btnDeliveryCancel', '#btnGoodsStatus'];
+        $(document).ready(function () {
+            $.each(abc, function (index, value) {
+                let t = $(value);
+                t.on('click', function () {
+                    let f = $("#frmGoGoXTDD");
+                    console.log($(this).data("type"));
+                    f.find("#type").val($(this).data("type"));
+                    f.submit();
+                });
+            });
+        });
+        */
+    </script>
+</body>
+</html>
